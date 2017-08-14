@@ -23,19 +23,30 @@ public class TuermeVonHanoi {
     return stapel;
   }
 
-  public void fuehreEinenZugDurch() {
-    int stapelIndex = gibStapelIndexMitKleinsterMuenze();
-    int muenze = stapel[stapelIndex].getObersteMuenze();
+  public void verschiebeObereMuenzenAufZwischenStapelUndUntersteMuenzeAufZielStapel(int startStapel, int zielStapel, int zwischenStapel) {
+    if (stapel[startStapel].getHoehe() > 1) {
+      verschiebeObersteMuenzeAufZwischenStapel(startStapel, zwischenStapel);
+      verschiebeUntereMuenzenAufZielStapel(startStapel, zielStapel);
+      verschiebeMuenzeVonZwischenStapelAufZielStapel(zwischenStapel, zielStapel);
+    } else {
+      verschiebeUntereMuenzenAufZielStapel(startStapel, zielStapel);
+    }
   }
 
-  private int gibStapelIndexMitKleinsterMuenze() {
-    int index = 0;
-    for (int i = 0; i < stapel.length; i++) {
-      if (stapel[i].getGroesseVonMuenze() < stapel[index].getGroesseVonMuenze()) {
-        index = i;
-      }
-    }
-    return index;
+  private void verschiebeUntereMuenzenAufZielStapel(final int startStapel, final int zielStapel) {
+    verschiebeMuenzeVonNach(stapel[startStapel], stapel[zielStapel]);
+  }
+
+  private void verschiebeMuenzeVonZwischenStapelAufZielStapel(final int zwischenStapel, final int zielStapel) {
+    verschiebeMuenzeVonNach(stapel[zwischenStapel], stapel[zielStapel]);
+  }
+
+  private void verschiebeObersteMuenzeAufZwischenStapel(final int startStapel, final int zwischenStapel) {
+    verschiebeMuenzeVonNach(stapel[startStapel], stapel[zwischenStapel]);
+  }
+
+  private void verschiebeMuenzeVonNach(final Stapel stapel, final Stapel stapel1) {
+    stapel1.setObersteMuenze(stapel.getObersteMuenze());
   }
 
 }
