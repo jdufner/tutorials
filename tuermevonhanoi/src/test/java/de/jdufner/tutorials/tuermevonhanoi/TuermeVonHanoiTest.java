@@ -33,11 +33,66 @@ public class TuermeVonHanoiTest {
     TuermeVonHanoi tuermeVonHanoi = new TuermeVonHanoi(hoehe);
 
     // act
-    tuermeVonHanoi.verschiebeObereMuenzenAufZwischenStapelUndUntersteMuenzeAufZielStapel(0, 1, 2);
+    tuermeVonHanoi.verschiebeMuenzenVonStartAufZielStapel(hoehe, 0, 1, 2);
 
     // assert
     assertEquals(0, tuermeVonHanoi.getStapel()[0].getHoehe());
+    assertEquals(0, tuermeVonHanoi.getStapel()[0].getGroesseVonMuenze());
     assertEquals(1, tuermeVonHanoi.getStapel()[1].getHoehe());
+    assertEquals(1, tuermeVonHanoi.getStapel()[1].getGroesseVonMuenze());
+    assertEquals(0, tuermeVonHanoi.getStapel()[2].getHoehe());
+    assertEquals(0, tuermeVonHanoi.getStapel()[2].getGroesseVonMuenze());
+  }
+
+  @Test
+  public void testInitGameHoehe2UndFuehreEinenZugDurch() {
+    // arrange
+    int hoehe = 2;
+    TuermeVonHanoi tuermeVonHanoi = new TuermeVonHanoi(hoehe);
+
+    // act
+    tuermeVonHanoi.verschiebeMuenzenVonStartAufZielStapel(hoehe, 0, 1, 2);
+
+    // assert
+    assertEquals(0, tuermeVonHanoi.getStapel()[0].getHoehe());
+    assertEquals(0, tuermeVonHanoi.getStapel()[0].getGroesseVonMuenze());
+    assertEquals(2, tuermeVonHanoi.getStapel()[1].getHoehe());
+    assertEquals(1, tuermeVonHanoi.getStapel()[1].getGroesseVonMuenze());
+    assertEquals(0, tuermeVonHanoi.getStapel()[2].getHoehe());
+    assertEquals(0, tuermeVonHanoi.getStapel()[2].getGroesseVonMuenze());
+  }
+
+  @Test
+  public void testInitGameHoehe3UndFuehreEinenZugDurch() {
+    // arrange
+    int hoehe = 3;
+    TuermeVonHanoi tuermeVonHanoi = new TuermeVonHanoi(hoehe);
+
+    // act
+    tuermeVonHanoi.verschiebeMuenzenVonStartAufZielStapel(hoehe, 0, 1, 2);
+
+    // assert
+    assertEquals(0, tuermeVonHanoi.getStapel()[0].getHoehe());
+    assertEquals(0, tuermeVonHanoi.getStapel()[0].getGroesseVonMuenze());
+    assertEquals(3, tuermeVonHanoi.getStapel()[1].getHoehe());
+    assertEquals(1, tuermeVonHanoi.getStapel()[1].getGroesseVonMuenze());
+    assertEquals(0, tuermeVonHanoi.getStapel()[2].getHoehe());
+    assertEquals(0, tuermeVonHanoi.getStapel()[2].getGroesseVonMuenze());
+  }
+
+  @Test
+  public void testInitGameHoehe4UndFuehreEinenZugDurch() {
+    // arrange
+    int hoehe = 4;
+    TuermeVonHanoi tuermeVonHanoi = new TuermeVonHanoi(hoehe);
+
+    // act
+    tuermeVonHanoi.verschiebeMuenzenVonStartAufZielStapel(hoehe, 0, 1, 2);
+
+    // assert
+    assertEquals(0, tuermeVonHanoi.getStapel()[0].getHoehe());
+    assertEquals(0, tuermeVonHanoi.getStapel()[0].getGroesseVonMuenze());
+    assertEquals(4, tuermeVonHanoi.getStapel()[1].getHoehe());
     assertEquals(1, tuermeVonHanoi.getStapel()[1].getGroesseVonMuenze());
     assertEquals(0, tuermeVonHanoi.getStapel()[2].getHoehe());
     assertEquals(0, tuermeVonHanoi.getStapel()[2].getGroesseVonMuenze());

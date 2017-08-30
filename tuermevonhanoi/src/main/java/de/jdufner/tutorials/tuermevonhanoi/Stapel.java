@@ -1,5 +1,8 @@
 package de.jdufner.tutorials.tuermevonhanoi;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 /**
  * @author Jürgen Dufner
  * @author Martin Beyer
@@ -57,4 +60,8 @@ public class Stapel {
     return 0;
   }
 
+  @Override
+  public String toString() {
+    return ToStringBuilder.reflectionToString(muenzen, ToStringStyle.SIMPLE_STYLE);
+  }
 }
