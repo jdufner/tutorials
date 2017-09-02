@@ -1,5 +1,8 @@
 package de.jdufner.tutorials.tuermevonhanoi;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 /**
  * @author Jürgen Dufner
  * @author Martin Beyer
@@ -20,8 +23,8 @@ public class Stapel {
 
   public int getHoehe() {
     int counter = 0;
-    for(int i = 0; i < muenzen.length; i++) {
-      if (muenzen[i] > 0 ) {
+    for (int i = 0; i < muenzen.length; i++) {
+      if (muenzen[i] > 0) {
         counter++;
       }
     }
@@ -29,7 +32,7 @@ public class Stapel {
   }
 
   public int getObersteMuenze() {
-    for(int i = 0; i < muenzen.length; i++) {
+    for (int i = 0; i < muenzen.length; i++) {
       if (muenzen[i] > 0) {
         int muenze = muenzen[i];
         muenzen[i] = 0;
@@ -40,7 +43,7 @@ public class Stapel {
   }
 
   public void setObersteMuenze(final int obersteMuenze) {
-    for (int i = muenzen.length-1; i > 0; i--) {
+    for (int i = muenzen.length - 1; i >= 0; i--) {
       if (muenzen[i] == 0) {
         muenzen[i] = obersteMuenze;
         return;
@@ -49,7 +52,7 @@ public class Stapel {
   }
 
   public int getGroesseVonMuenze() {
-    for(int i = 0; i < muenzen.length; i++) {
+    for (int i = 0; i < muenzen.length; i++) {
       if (muenzen[i] > 0) {
         return muenzen[i];
       }
@@ -57,4 +60,8 @@ public class Stapel {
     return 0;
   }
 
+  @Override
+  public String toString() {
+    return ToStringBuilder.reflectionToString(muenzen, ToStringStyle.SIMPLE_STYLE);
+  }
 }
