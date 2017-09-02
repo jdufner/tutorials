@@ -16,8 +16,8 @@ node {
   }
 
   stage('Result') {
-    junit 'target/surefire-reports/TEST*.xml, target/failsafe-reports/TEST*.xml'
-    jacoco classPattern: 'target/classes', execPattern: 'target/coverage-reports/jacoco**.exec', sourcePattern: 'src/main/java'
+    junit '**/target/surefire-reports/TEST*.xml, **/target/failsafe-reports/TEST*.xml'
+    jacoco classPattern: '**/target/classes', execPattern: '**/target/coverage-reports/jacoco**.exec', sourcePattern: '**/src/main/java'
     checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
     findbugs canComputeNew: false, defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', isRankActivated: true, pattern: '', unHealthy: ''
     openTasks canComputeNew: false, defaultEncoding: '', excludePattern: '', healthy: '', high: 'FIXME', ignoreCase: true, low: '', normal: 'TODO', pattern: 'src/main/java/**/*.java, src/test/java/**/*.java', unHealthy: ''
