@@ -268,7 +268,7 @@
               </execution>
             </executions>
           </plugin>
-          <plugin>
+          <!--plugin>
             <groupId>org.owasp</groupId>
             <artifactId>dependency-check-maven</artifactId>
             <version>1.4.5</version>
@@ -284,7 +284,7 @@
                 </goals>
               </execution>
             </executions>
-          </plugin>
+          </plugin-->
         </plugins>
       </build>
 
@@ -338,7 +338,7 @@
               <findbugsXmlOutputDirectory>${project.build.directory}/findbugs</findbugsXmlOutputDirectory>
             </configuration>
           </plugin>
-          <plugin>
+          <!--plugin>
             <groupId>org.owasp</groupId>
             <artifactId>dependency-check-maven</artifactId>
             <version>1.4.5</version>
@@ -352,7 +352,7 @@
                 </reports>
               </reportSet>
             </reportSets>
-          </plugin>
+          </plugin-->
         </plugins>
       </reporting>
     </profile>
