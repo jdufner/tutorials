@@ -9,8 +9,21 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>1.8</java.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <jacoco.version>0.7.9</jacoco.version>
+    <jacoco.outputDir>${project.build.directory}/coverage-reports</jacoco.outputDir>
+    <jacoco.out.ut.file>jacoco-ut.exec</jacoco.out.ut.file>
+    <jacoco.out.it.file>jacoco-it.exec</jacoco.out.it.file>
+    <sonar.language>java</sonar.language>
+    <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
+    <sonar.junit.reportsPath>${project.build.directory}/surefire-reports</sonar.junit.reportsPath>
+    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+    <sonar.jacoco.reportPath>${jacoco.outputDir}/${jacoco.out.ut.file}</sonar.jacoco.reportPath>
+    <sonar.jacoco.itReportPath>${jacoco.outputDir}/${jacoco.out.it.file}</sonar.jacoco.itReportPath>
+    <sonar.jacoco.reportPaths>${jacoco.outputDir}/${jacoco.out.ut.file}, ${jacoco.outputDir}/${jacoco.out.it.file}</sonar.jacoco.reportPaths>
   </properties>
 
   <dependencies>
@@ -21,6 +34,359 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.sonarsource.scanner.maven</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+          <version>3.1.1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <!-- Sets the VM argument line used when unit tests are run. -->
+          <argLine>${surefireArgLine}</argLine>
+          <!-- Skips unit tests if the value of skip.unit.tests property is true -->
+          <skipTests>${skip.unit.tests}</skipTests>
+          <includes>
+            <include>**/*Test.java</include>
+            <include>**/*CT.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <!-- Sets the VM argument line used when integration tests are run. -->
+          <argLine>${failsafeArgLine}</argLine>
+          <!-- Skips integration tests if the value of skip.integration.tests property is true -->
+          <skipTests>${skip.integration.tests}</skipTests>
+          <includes>
+            <include>**/*AT.java</include>
+            <include>**/*IT.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5.3</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>project</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>create-archive</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
+        <executions>
+          <!-- Prepares the property pointing to the JaCoCo runtime agent which is passed as VM argument when Maven the Surefire plugin
+            is executed. -->
+          <execution>
+            <id>pre-unit-test</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+            <configuration>
+              <append>true</append>
+              <!-- Sets the path to the file which contains the execution data. -->
+              <destFile>${jacoco.outputDir}/${jacoco.out.ut.file}</destFile>
+              <!-- Sets the name of the property containing the settings for JaCoCo runtime agent. -->
+              <propertyName>surefireArgLine</propertyName>
+            </configuration>
+          </execution>
+          <!-- Ensures that the code coverage report for unit tests is created after unit tests have been run. -->
+          <execution>
+            <id>post-unit-test</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+            <configuration>
+              <!-- Sets the path to the file which contains the execution data. -->
+              <dataFile>${jacoco.outputDir}/${jacoco.out.ut.file}</dataFile>
+              <!-- Sets the output directory for the code coverage report. -->
+              <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+            </configuration>
+          </execution>
+          <!-- Prepares the property pointing to the JaCoCo runtime agent which is passed as VM argument when Maven the Failsafe plugin
+            is executed. -->
+          <execution>
+            <id>pre-integration-test</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+            <configuration>
+              <append>true</append>
+              <!-- Sets the path to the file which contains the execution data. -->
+              <destFile>${jacoco.outputDir}/${jacoco.out.it.file}</destFile>
+              <!-- Sets the name of the property containing the settings for JaCoCo runtime agent. -->
+              <propertyName>failsafeArgLine</propertyName>
+            </configuration>
+          </execution>
+          <!-- Ensures that the code coverage report for integration tests after integration tests have been run. -->
+          <execution>
+            <id>post-integration-test</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+            <configuration>
+              <!-- Sets the path to the file which contains the execution data. -->
+              <dataFile>${jacoco.outputDir}/${jacoco.out.it.file}</dataFile>
+              <!-- Sets the output directory for the code coverage report. -->
+              <outputDirectory>${project.reporting.outputDirectory}/jacoco-it</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>report-aggregate</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>report-aggregate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>qa</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-checkstyle-plugin</artifactId>
+            <version>2.17</version>
+            <configuration>
+              <logViolationsToConsole>true</logViolationsToConsole>
+              <checkstyleRules>
+                <module name="Checker">
+                  <module name="LineLength">
+                    <property name="max" value="132" />
+                  </module>
+                  <module name="TreeWalker">
+                    <module name="LineLength">
+                      <property name="max" value="132" />
+                    </module>
+                  </module>
+                </module>
+              </checkstyleRules>
+            </configuration>
+          </plugin>
+          <!-- Es ist keine gute Idee das Dependency-Plugin mit Spring Boot zu verwenden -->
+          <!--plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>3.0.0</version>
+          </plugin-->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-pmd-plugin</artifactId>
+            <version>3.7</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>check</goal>
+                  <goal>cpd-check</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <linkXref>true</linkXref>
+              <sourceEncoding>utf-8</sourceEncoding>
+              <minimumTokens>100</minimumTokens>
+              <failOnViolation>false</failOnViolation>
+              <failurePriority>4</failurePriority>
+              <rulesets>
+                <ruleset>${pom.basedir}/ruleset.xml</ruleset>
+              </rulesets>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>findbugs-maven-plugin</artifactId>
+            <version>3.0.4</version>
+            <configuration>
+              <!--
+                  Enables analysis which takes more memory but finds more bugs.
+                  If you run out of memory, changes the value of the effort element
+                  to 'Low'.
+              -->
+              <effort>Max</effort>
+              <!-- Build doesn't fail if problems are found -->
+              <failOnError>false</failOnError>
+              <!-- Reports all bugs (other values are medium and max) -->
+              <threshold>Low</threshold>
+              <!-- Produces XML report -->
+              <xmlOutput>true</xmlOutput>
+              <!-- Configures the directory in which the XML report is created -->
+              <findbugsXmlOutputDirectory>${project.build.directory}/findbugs</findbugsXmlOutputDirectory>
+            </configuration>
+            <executions>
+              <!--
+                  Ensures that FindBugs inspects source code when project is compiled.
+              -->
+              <execution>
+                <id>analyze-compile</id>
+                <phase>compile</phase>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.owasp</groupId>
+            <artifactId>dependency-check-maven</artifactId>
+            <version>1.4.5</version>
+            <configuration>
+              <cveValidForHours>12</cveValidForHours>
+              <failBuildOnCVSS>8</failBuildOnCVSS>
+              <format>XML</format>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+
+      <reporting>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-checkstyle-plugin</artifactId>
+            <version>2.17</version>
+            <reportSets>
+              <reportSet>
+                <reports>
+                  <report>checkstyle</report>
+                </reports>
+              </reportSet>
+            </reportSets>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-pmd-plugin</artifactId>
+            <version>3.7</version>
+            <configuration>
+              <linkXref>true</linkXref>
+              <sourceEncoding>utf-8</sourceEncoding>
+              <minimumTokens>100</minimumTokens>
+              <targetJdk>1.8</targetJdk>
+              <excludes>
+                <exclude>**/generated/*.java</exclude>
+              </excludes>
+              <excludeRoots>
+                <excludeRoot>target/generated-sources/stubs</excludeRoot>
+              </excludeRoots>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>findbugs-maven-plugin</artifactId>
+            <version>3.0.4</version>
+            <configuration>
+              <!--
+                  Enables analysis which takes more memory but finds more bugs.
+                  If you run out of memory, changes the value of the effort element
+                  to 'low'.
+              -->
+              <effort>Max</effort>
+              <!-- Reports all bugs (other values are medium and max) -->
+              <threshold>Low</threshold>
+              <!-- Produces XML report -->
+              <xmlOutput>true</xmlOutput>
+              <!-- Configures the directory in which the XML report is created -->
+              <findbugsXmlOutputDirectory>${project.build.directory}/findbugs</findbugsXmlOutputDirectory>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.owasp</groupId>
+            <artifactId>dependency-check-maven</artifactId>
+            <version>1.4.5</version>
+            <configuration>
+              <name>Dependency Check</name>
+            </configuration>
+            <reportSets>
+              <reportSet>
+                <reports>
+                  <report>aggregate</report>
+                </reports>
+              </reportSet>
+            </reportSets>
+          </plugin>
+        </plugins>
+      </reporting>
+    </profile>
+  </profiles>
+
+  <licenses>
+    <license>
+      <name>GNU General Public License 3</name>
+      <url>https://www.gnu.org/licenses/gpl-3.0.html</url>
+    </license>
+  </licenses>
+
+  <issueManagement>
+    <url>https://github.com/jdufner/tutorials/issues</url>
+    <system>GitHub Issues</system>
+  </issueManagement>
+
+  <scm>
+    <connection>scm:git:git@github.com:jdufner/tutorials.git</connection>
+    <developerConnection>scm:git:git@github.com:jdufner/tutorials.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
+  <developers>
+    <developer>
+      <id>jdufner</id>
+      <name>Jürgen Dufner</name>
+      <email>juergen@jdufner.de</email>
+      <timezone>Europe/Berlin</timezone>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+  </developers>
 
   <modules>
     <module>tuermevonhanoi</module>
