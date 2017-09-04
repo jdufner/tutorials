@@ -390,6 +390,7 @@
 
   <modules>
     <module>tuermevonhanoi</module>
+    <module>tin</module>
   </modules>
 
 </project>
