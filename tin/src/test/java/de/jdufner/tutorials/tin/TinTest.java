@@ -1,5 +1,6 @@
 package de.jdufner.tutorials.tin;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -89,8 +90,19 @@ public class TinTest {
   }
 
   @Test
+  public void whenKleinsteMoeglicheNummer_expectValid() {
+    assertThat(new Tin(10020345677L).isValid()).isTrue();
+  }
+
+  @Test
+  public void whenStetigSteigendeNummer_expectValid() {
+    assertThat(new Tin(12345678903L).isValid()).isTrue();
+  }
+
+  @Test
+  @Ignore
   public void generator() {
-    for (long l = 10123456780L; l < 10124000000L; l++) {
+    for (long l = 10020345670L; l < 10123456789L; l++) {
       Tin tin = new Tin(l);
       if (tin.isValid()) {
         System.out.println(tin);

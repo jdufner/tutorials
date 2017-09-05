@@ -72,9 +72,7 @@ public class TinGeneratorTest {
     }
 
     private void generate() throws InterruptedException {
-      for (long l = 10023456789L; l >= 10000000000L; l--) {
-//      for (long l = 10023456780L; l < 10100000000L; l++) {
-//      for (long l = 10023456780L; l < 10023457000L; l++) {
+      for (long l = 10020345670L; l < 10123456789L; l++) {
         queue.put(l);
       }
       for (int i = 0; i < numberConsumer; i++) {
@@ -111,7 +109,7 @@ public class TinGeneratorTest {
         }
         Tin tin = new Tin(number);
         if (tin.isValid()) {
-          System.out.println(tin);
+//          System.out.println(tin);
         }
       }
     }
