@@ -100,6 +100,16 @@ public class TinTest {
   }
 
   @Test
+  public void testSomeBeautifulNumbers() {
+    // assert
+    assertThat(new Tin(10020345677L).isValid()).isTrue();
+    assertThat(new Tin(11234567890L).isValid()).isTrue();
+    assertThat(new Tin(12345678903L).isValid()).isTrue();
+    assertThat(new Tin(23456789013L).isValid()).isTrue();
+    assertThat(new Tin(34567890125L).isValid()).isTrue();
+  }
+
+  @Test
   @Ignore
   public void generator() {
     for (long l = 10020345670L; l < 10123456789L; l++) {
