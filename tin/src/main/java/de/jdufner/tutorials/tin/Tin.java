@@ -11,11 +11,11 @@ public class Tin {
 
   private static final int LAENGE = 11;
 
-  private final String tin;
+  private final String nummerMitPruefziffer;
   private String nummer;
 
   public Tin(final long l) {
-    this.tin = String.valueOf(l);
+    this.nummerMitPruefziffer = String.valueOf(l);
   }
 
   public boolean isValid() {
@@ -27,7 +27,7 @@ public class Tin {
    * 0. (Ist eingehalten, wenn die Zahl aus einer Long erzeugt wurde.)
    */
   private boolean has11Digits() {
-    return tin.length() == LAENGE;
+    return nummerMitPruefziffer.length() == LAENGE;
   }
 
   /**
@@ -39,7 +39,7 @@ public class Tin {
    * diese niemals an direkt aufeinander folgenden Stellen stehen.
    */
   private boolean isNummerValid() {
-    this.nummer = tin.substring(0, LAENGE - 1);
+    this.nummer = nummerMitPruefziffer.substring(0, LAENGE - 1);
     Map<Character, Integer> ziffernhaeufigkeit = zaehleZiffernhaeufigkeit();
     if (zaehleMehrfache(ziffernhaeufigkeit) > 1) {
       return false;
@@ -96,7 +96,7 @@ public class Tin {
    * Regel 3: An der 11. Stelle steht die Prüfziffer.
    */
   private boolean isPruefzifferValid() {
-    final String pruefziffer = tin.substring(LAENGE - 1, LAENGE);
+    final String pruefziffer = nummerMitPruefziffer.substring(LAENGE - 1, LAENGE);
     return Integer.parseInt(pruefziffer) == berechnePruefziffer();
   }
 
@@ -121,6 +121,6 @@ public class Tin {
 
   @Override
   public String toString() {
-    return tin;
+    return nummerMitPruefziffer;
   }
 }
