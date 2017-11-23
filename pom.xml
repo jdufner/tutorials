@@ -389,6 +389,7 @@
   <modules>
     <module>tuermevonhanoi</module>
     <module>tin</module>
+    <module>functional</module>
   </modules>
 
 </project>
