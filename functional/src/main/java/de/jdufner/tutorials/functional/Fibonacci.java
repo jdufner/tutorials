@@ -6,7 +6,6 @@ package de.jdufner.tutorials.functional;
  */
 public class Fibonacci {
 
-
   /**
    * Pure Function
    */
