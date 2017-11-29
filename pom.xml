@@ -390,6 +390,7 @@
     <module>tuermevonhanoi</module>
     <module>tin</module>
     <module>functional</module>
+    <module>strategy</module>
   </modules>
 
 </project>
