@@ -231,7 +231,7 @@
               <failOnViolation>false</failOnViolation>
               <failurePriority>4</failurePriority>
               <rulesets>
-                <ruleset>${pom.basedir}/ruleset.xml</ruleset>
+                <ruleset>${session.executionRootDirectory}/ruleset.xml</ruleset>
               </rulesets>
             </configuration>
           </plugin>
