@@ -20,12 +20,10 @@ public interface Strategy<T extends Type> {
         if (parameterizedType.getRawType().equals(Strategy.class)) {
           return (Class) parameterizedType.getActualTypeArguments()[0];
         }
-      } else {
-        throw new RuntimeException(
-            "Implements " + getClass().getSimpleName() + " a generic interface ?");
       }
     }
-    return null;
+    throw new RuntimeException(
+        "Implements " + getClass().getSimpleName() + " a generic interface ?");
   }
 
 }
