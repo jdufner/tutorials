@@ -1,8 +1,6 @@
 package de.jdufner.tutorials.pattern.strategy.enumeration.strategies;
 
 import de.jdufner.tutorials.pattern.strategy.enumeration.enums.Art;
-import de.jdufner.tutorials.pattern.strategy.enumeration.types.ThreeType;
-import de.jdufner.tutorials.pattern.strategy.enumeration.types.Type;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,11 +11,6 @@ import org.springframework.stereotype.Component;
 public class ThreeStrategy implements Strategy {
 
   public static final String NAME = "a complex strategy";
-
-  @Override
-  public Type getType() {
-    return new ThreeType();
-  }
 
   @Override
   public Art getArt() {

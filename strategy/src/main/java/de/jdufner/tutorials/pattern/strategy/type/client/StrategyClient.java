@@ -2,7 +2,6 @@ package de.jdufner.tutorials.pattern.strategy.type.client;
 
 import de.jdufner.tutorials.pattern.strategy.type.strategies.Strategy;
 import de.jdufner.tutorials.pattern.strategy.type.types.Type;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -15,20 +14,19 @@ import java.util.Collection;
 @Component
 public class StrategyClient {
 
-  private Collection<Strategy> strategies;
+  private final Collection<Strategy> strategies;
 
-  @Autowired
-  public StrategyClient(Collection<Strategy> strategies) {
+  public StrategyClient(final Collection<Strategy> strategies) {
     this.strategies = strategies;
   }
 
-  public String executeStrategy(Type type) {
+  public String executeStrategy(final Type type) {
     return getStrategy(type).executeStrategy();
   }
 
-  private Strategy getStrategy(Type type) {
+  private Strategy getStrategy(final Type type) {
     return strategies.stream()
-        .filter(s -> s.getType().getClass() == type.getClass())
+        .filter(s -> s.getType().getName() == type.getName())
         .findFirst()
         .get();
   }

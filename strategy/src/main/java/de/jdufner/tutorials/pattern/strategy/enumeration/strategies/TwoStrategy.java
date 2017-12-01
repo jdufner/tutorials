@@ -1,8 +1,6 @@
 package de.jdufner.tutorials.pattern.strategy.enumeration.strategies;
 
 import de.jdufner.tutorials.pattern.strategy.enumeration.enums.Art;
-import de.jdufner.tutorials.pattern.strategy.enumeration.types.TwoType;
-import de.jdufner.tutorials.pattern.strategy.enumeration.types.Type;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,11 +11,6 @@ import org.springframework.stereotype.Component;
 public class TwoStrategy implements Strategy {
 
   public static final String NAME = "another strategy";
-
-  @Override
-  public Type getType() {
-    return new TwoType();
-  }
 
   @Override
   public Art getArt() {
