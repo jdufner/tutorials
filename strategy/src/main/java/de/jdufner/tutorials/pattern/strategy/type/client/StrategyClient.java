@@ -1,8 +1,7 @@
-package de.jdufner.tutorials.pattern.strategy.client;
+package de.jdufner.tutorials.pattern.strategy.type.client;
 
-import de.jdufner.tutorials.pattern.strategy.enums.Art;
-import de.jdufner.tutorials.pattern.strategy.strategies.Strategy;
-import de.jdufner.tutorials.pattern.strategy.types.Type;
+import de.jdufner.tutorials.pattern.strategy.type.strategies.Strategy;
+import de.jdufner.tutorials.pattern.strategy.type.types.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -32,14 +31,6 @@ public class StrategyClient {
         .filter(s -> s.getType().getClass() == type.getClass())
         .findFirst()
         .get();
-  }
-
-  public String executeStrategy(Art art) {
-    return getStrategy(art).executeStrategy();
-  }
-
-  private Strategy getStrategy(Art art) {
-    return strategies.stream().filter(s -> s.getArt() == art).findFirst().get();
   }
 
 }

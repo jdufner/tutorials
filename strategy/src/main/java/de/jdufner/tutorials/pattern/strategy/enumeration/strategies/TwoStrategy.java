@@ -1,8 +1,8 @@
-package de.jdufner.tutorials.pattern.strategy.strategies;
+package de.jdufner.tutorials.pattern.strategy.enumeration.strategies;
 
-import de.jdufner.tutorials.pattern.strategy.enums.Art;
-import de.jdufner.tutorials.pattern.strategy.types.TwoType;
-import de.jdufner.tutorials.pattern.strategy.types.Type;
+import de.jdufner.tutorials.pattern.strategy.enumeration.enums.Art;
+import de.jdufner.tutorials.pattern.strategy.enumeration.types.TwoType;
+import de.jdufner.tutorials.pattern.strategy.enumeration.types.Type;
 import org.springframework.stereotype.Component;
 
 /**

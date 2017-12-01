@@ -1,12 +1,11 @@
-package de.jdufner.tutorials.pattern.strategy.client;
+package de.jdufner.tutorials.pattern.strategy.type.client;
 
-import de.jdufner.tutorials.pattern.strategy.enums.Art;
-import de.jdufner.tutorials.pattern.strategy.strategies.OneStrategy;
-import de.jdufner.tutorials.pattern.strategy.strategies.ThreeStrategy;
-import de.jdufner.tutorials.pattern.strategy.strategies.TwoStrategy;
-import de.jdufner.tutorials.pattern.strategy.types.OneType;
-import de.jdufner.tutorials.pattern.strategy.types.ThreeType;
-import de.jdufner.tutorials.pattern.strategy.types.TwoType;
+import de.jdufner.tutorials.pattern.strategy.type.strategies.OneStrategy;
+import de.jdufner.tutorials.pattern.strategy.type.strategies.ThreeStrategy;
+import de.jdufner.tutorials.pattern.strategy.type.strategies.TwoStrategy;
+import de.jdufner.tutorials.pattern.strategy.type.types.OneType;
+import de.jdufner.tutorials.pattern.strategy.type.types.ThreeType;
+import de.jdufner.tutorials.pattern.strategy.type.types.TwoType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,23 +38,8 @@ public class StrategyClientTest {
     assertEquals(ThreeStrategy.NAME, client.executeStrategy(new ThreeType()));
   }
 
-  @Test
-  public void whenArtOneExecuteStrategyOne() {
-    assertEquals(OneStrategy.NAME, client.executeStrategy(Art.ONE));
-  }
-
-  @Test
-  public void whenArtTwoExecuteStrategyTwo() {
-    assertEquals(TwoStrategy.NAME, client.executeStrategy(Art.TWO));
-  }
-
-  @Test
-  public void whenArtThreeExecuteStrategyThree() {
-    assertEquals(ThreeStrategy.NAME, client.executeStrategy(Art.THREE));
-  }
-
   @Configuration
-  @ComponentScan(basePackages = "de.jdufner.tutorials.pattern.strategy")
+  @ComponentScan(basePackages = "de.jdufner.tutorials.pattern.strategy.type")
   static class StrategyClientTestConfiguration {
   }
 

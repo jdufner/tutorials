@@ -1,4 +1,4 @@
-package de.jdufner.tutorials.pattern.strategy.enums;
+package de.jdufner.tutorials.pattern.strategy.enumeration.enums;
 
 /**
  * @author Jürgen Dufner
