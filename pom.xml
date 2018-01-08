@@ -393,6 +393,7 @@
     <module>tin</module>
     <module>functional</module>
     <module>strategy</module>
+    <module>mapreduce</module>
   </modules>
 
 </project>
