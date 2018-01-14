@@ -28,7 +28,7 @@ public class PersonTest {
   public void whenNotEquals_expectNotSameAndNoEqualsHashCodes() {
     // arrange
     Person p1 = PersonBuilder.HANS_HAUSER.build();
-    Person p2 = PersonBuilder.HANS_HAUSER.withNachname("Hofmann").build();
+    Person p2 = PersonBuilder.HANS_HAUSER.but().withNachname("Hofmann").build();
 
     // act
 
@@ -66,8 +66,19 @@ public class PersonTest {
       return this;
     }
 
+    private PersonBuilder withGeburtsdatum(final LocalDate geburtsdatum) {
+      this.geburtsdatum = geburtsdatum;
+      return this;
+    }
+
     public Person build() {
       return new Person(vorname, nachname, geburtsdatum);
+    }
+
+    public PersonBuilder but() {
+      return new PersonBuilder().withVorname(vorname)
+          .withNachname(nachname)
+          .withGeburtsdatum(geburtsdatum);
     }
   }
 
