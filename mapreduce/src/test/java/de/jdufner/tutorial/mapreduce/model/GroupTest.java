@@ -126,4 +126,19 @@ public class GroupTest {
     assertEquals("Hans Hauser, Martina Müller", namenAsText);
   }
 
+  @Test
+  public void testNamenAsTextStreamApiEigenerCollector_whenGroupContainsManyPeople_expectNamenAsString() {
+    // arrange
+    List<Person> people = new ArrayList<>();
+    people.add(HANS_HAUSER.build());
+    people.add(MARTINA_MUELLER.build());
+    Group group = new Group(people);
+
+    // act
+    String namenAsText = group.namenAsTextStreamApiEigenerCollector();
+
+    // assert
+    assertEquals("Hans Hauser, Martina Müller", namenAsText);
+  }
+
 }
