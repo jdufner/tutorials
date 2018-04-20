@@ -1,7 +1,7 @@
 node {
 
   stage('Configure') {
-    env.JAVA_HOME="${tool 'JDK-1.8.0_131'}"
+    env.JAVA_HOME="${tool 'jdk8'}"
     env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
     sh 'java -version'
   }
