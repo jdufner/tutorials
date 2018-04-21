@@ -1,5 +1,6 @@
 package de.jdufner.tutorials.tupel;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -51,6 +52,12 @@ public class TupelBuilderTest {
     assertThat(TupelBuilder.isValid(feld)).isTrue();
     assertThat(TupelBuilder.stringOf(feld)).contains("  1  2  3  4  5  6  7  8").contains
         ("  1 51 52 53 54 55 56 57").contains("  8 15 21 27 33 39 45 51");
+  }
+
+  @Test
+  @Ignore
+  public void test() {
+    System.out.println(TupelBuilder.stringOf(TupelBuilder.build(3)));
   }
 
 }
