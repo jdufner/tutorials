@@ -414,6 +414,7 @@
     <module>strategy</module>
     <module>mapreduce</module>
     <module>tupel</module>
+    <module>junit4</module>
   </modules>
 
 </project>
