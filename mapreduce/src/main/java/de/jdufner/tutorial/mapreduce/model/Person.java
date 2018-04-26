@@ -1,11 +1,10 @@
 package de.jdufner.tutorial.mapreduce.model;
 
+import java.time.LocalDate;
 import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.Transformer;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-
-import java.time.LocalDate;
 
 /**
  * I DO NOT USE Lombok, because I want to show how to implement equals() and hashCode().
@@ -18,11 +17,6 @@ public class Person {
   private final String vorname; // part of natural key
   private final String nachname; // part of natural key
   private final LocalDate geburtsdatum; // part of natural key
-  private Long id; // technical key
-  private String strasse;
-  private String hausnummer;
-  private String plz;
-  private String ort;
 
   public Person(final String vorname, final String nachname, final LocalDate geburtsdatum) {
     this.vorname = vorname;

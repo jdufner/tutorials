@@ -2,9 +2,8 @@ package de.jdufner.tutorials.pattern.strategy.enumeration.client;
 
 import de.jdufner.tutorials.pattern.strategy.enumeration.enums.Art;
 import de.jdufner.tutorials.pattern.strategy.enumeration.strategies.Strategy;
-import org.springframework.stereotype.Component;
-
 import java.util.Collection;
+import org.springframework.stereotype.Component;
 
 
 /**

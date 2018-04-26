@@ -1,5 +1,7 @@
 package de.jdufner.tutorials.pattern.strategy.enumeration.client;
 
+import static org.junit.Assert.assertEquals;
+
 import de.jdufner.tutorials.pattern.strategy.enumeration.enums.Art;
 import de.jdufner.tutorials.pattern.strategy.enumeration.strategies.OneStrategy;
 import de.jdufner.tutorials.pattern.strategy.enumeration.strategies.ThreeStrategy;
@@ -11,8 +13,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration

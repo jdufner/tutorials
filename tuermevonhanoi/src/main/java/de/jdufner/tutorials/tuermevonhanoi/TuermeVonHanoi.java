@@ -1,5 +1,6 @@
 package de.jdufner.tutorials.tuermevonhanoi;
 
+import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.slf4j.Logger;
@@ -24,7 +25,7 @@ public final class TuermeVonHanoi {
   }
 
   public Stapel[] getStapel() {
-    return stapel;
+    return SerializationUtils.clone(stapel);
   }
 
   public void verschiebeMuenzenVonStartAufZielStapel(int hoehe, int startStapel, int zielStapel, int zwischenStapel) {

@@ -1,12 +1,11 @@
 package de.jdufner.tutorial.mapreduce.model;
 
-import org.junit.Test;
-
-import java.time.LocalDate;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
+
+import java.time.LocalDate;
+import org.junit.Test;
 
 public class PersonTest {
 

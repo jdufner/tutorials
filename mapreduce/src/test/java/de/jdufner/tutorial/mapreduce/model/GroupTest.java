@@ -1,14 +1,13 @@
 package de.jdufner.tutorial.mapreduce.model;
 
-import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static de.jdufner.tutorial.mapreduce.model.PersonTest.PersonBuilder.HANS_HAUSER;
 import static de.jdufner.tutorial.mapreduce.model.PersonTest.PersonBuilder.MARTINA_MUELLER;
 import static java.util.Collections.emptyList;
 import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.Test;
 
 public class GroupTest {
 

@@ -2,9 +2,8 @@ package de.jdufner.tutorials.pattern.strategy.type.client;
 
 import de.jdufner.tutorials.pattern.strategy.type.strategies.Strategy;
 import de.jdufner.tutorials.pattern.strategy.type.types.Type;
-import org.springframework.stereotype.Component;
-
 import java.util.Collection;
+import org.springframework.stereotype.Component;
 
 
 /**

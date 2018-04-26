@@ -1,5 +1,11 @@
 package de.jdufner.tutorial.mapreduce.model;
 
+import static java.lang.String.format;
+import static java.util.stream.Collectors.joining;
+import static org.apache.commons.collections4.CollectionUtils.collect;
+import static org.apache.commons.collections4.CollectionUtils.select;
+import static org.apache.commons.lang3.StringUtils.join;
+
 import de.jdufner.tutorial.mapreduce.model.Person.NotNullPersonPredicate;
 import de.jdufner.tutorial.mapreduce.model.Person.ToNameTransformer;
 import java.util.List;
@@ -11,12 +17,6 @@ import java.util.stream.Collector;
 import java.util.stream.Stream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static java.lang.String.format;
-import static java.util.stream.Collectors.joining;
-import static org.apache.commons.collections4.CollectionUtils.collect;
-import static org.apache.commons.collections4.CollectionUtils.select;
-import static org.apache.commons.lang3.StringUtils.join;
 
 public class Group {
 

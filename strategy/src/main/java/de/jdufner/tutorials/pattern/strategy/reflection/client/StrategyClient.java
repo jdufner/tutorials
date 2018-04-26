@@ -2,10 +2,9 @@ package de.jdufner.tutorials.pattern.strategy.reflection.client;
 
 import de.jdufner.tutorials.pattern.strategy.reflection.strategies.Strategy;
 import de.jdufner.tutorials.pattern.strategy.reflection.types.Type;
+import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Collection;
 
 
 /**

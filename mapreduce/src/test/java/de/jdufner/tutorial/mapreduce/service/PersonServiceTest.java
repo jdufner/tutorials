@@ -1,10 +1,9 @@
 package de.jdufner.tutorial.mapreduce.service;
 
 import de.jdufner.tutorial.mapreduce.model.Person;
+import java.time.LocalDate;
 import org.junit.Test;
 import org.mockito.InjectMocks;
-
-import java.time.LocalDate;
 
 public class PersonServiceTest {
 
