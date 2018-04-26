@@ -1,7 +1,6 @@
 package de.jdufner.tutorials.pattern.strategy.reflection.strategies;
 
 import de.jdufner.tutorials.pattern.strategy.reflection.types.Type;
-
 import java.lang.reflect.ParameterizedType;
 
 /**
@@ -22,8 +21,7 @@ public interface Strategy<T extends Type> {
         }
       }
     }
-    throw new RuntimeException(
-        "Implements " + getClass().getSimpleName() + " a generic interface ?");
+    throw new StrategyException("Implements " + getClass().getSimpleName() + " a generic interface ?");
   }
 
 }

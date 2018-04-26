@@ -2,7 +2,6 @@ package de.jdufner.tutorial.mapreduce.model;
 
 import de.jdufner.tutorial.mapreduce.model.Person.NotNullPersonPredicate;
 import de.jdufner.tutorial.mapreduce.model.Person.ToNameTransformer;
-
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
@@ -10,6 +9,8 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static java.lang.String.format;
 import static java.util.stream.Collectors.joining;
@@ -18,6 +19,8 @@ import static org.apache.commons.collections4.CollectionUtils.select;
 import static org.apache.commons.lang3.StringUtils.join;
 
 public class Group {
+
+  private static final Logger LOG = LoggerFactory.getLogger(Group.class);
 
   private List<Person> people;
 
@@ -58,7 +61,7 @@ public class Group {
 
           @Override
           public StringBuilder get() {
-            System.out.println(format("(supplier) i=%d", i++));
+            LOG.info(format("(supplier) i=%d", i++));
             return new StringBuilder();
           }
         },
@@ -68,7 +71,7 @@ public class Group {
 
           @Override
           public void accept(final StringBuilder s1, final String s2) {
-            System.out.println(format("(accumulator) j=%d, s1=%s, s2=%s", j++, s1, s2));
+            LOG.info(format("(accumulator) j=%d, s1=%s, s2=%s", j++, s1, s2));
             if (j > 1) {
               s1.append(", ");
             }
@@ -81,7 +84,7 @@ public class Group {
 
           @Override
           public StringBuilder apply(final StringBuilder s1, final StringBuilder s2) {
-            System.out.println(format("(combiner) k=%d, s1=%s, s2=%s", k++, s1, s2));
+            LOG.info(format("(combiner) k=%d, s1=%s, s2=%s", k++, s1, s2));
             return s1.append(s2);
           }
         },
@@ -91,7 +94,7 @@ public class Group {
 
           @Override
           public String apply(final StringBuilder s) {
-            System.out.println(format("(finisher) l=%d, s=%s", l++, s));
+            LOG.info(format("(finisher) l=%d, s=%s", l++, s));
             return s.toString();
           }
         }));

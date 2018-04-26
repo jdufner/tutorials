@@ -8,7 +8,7 @@ package de.jdufner.tutorials.tupel;
  * @author Jürgen Dufner
  * @since 1.0
  */
-public class TupelBuilder {
+public final class TupelBuilder {
 
   private TupelBuilder() {
   }

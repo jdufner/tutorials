@@ -10,9 +10,9 @@ import org.slf4j.LoggerFactory;
  * @author Martin Beyer
  * @since 1.0
  */
-public class TuermeVonHanoi {
+public final class TuermeVonHanoi {
 
-  private static final Logger log = LoggerFactory.getLogger(TuermeVonHanoi.class);
+  private static final Logger LOG = LoggerFactory.getLogger(TuermeVonHanoi.class);
 
   private Stapel[] stapel = new Stapel[3];
 
@@ -20,7 +20,7 @@ public class TuermeVonHanoi {
     stapel[0] = new Stapel(hoehe, hoehe);
     stapel[1] = new Stapel(0, hoehe);
     stapel[2] = new Stapel(0, hoehe);
-    log.info(toString());
+    LOG.info(toString());
   }
 
   public Stapel[] getStapel() {
@@ -43,7 +43,7 @@ public class TuermeVonHanoi {
 
   private void verschiebeMuenzeVonNach(final Stapel startStapel, final Stapel zielStapel) {
     zielStapel.setObersteMuenze(startStapel.getObersteMuenze());
-    log.info(toString());
+    LOG.info(toString());
   }
 
   @Override
