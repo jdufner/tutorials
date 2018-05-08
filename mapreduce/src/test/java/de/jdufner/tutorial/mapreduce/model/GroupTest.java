@@ -5,10 +5,13 @@ import static de.jdufner.tutorial.mapreduce.model.PersonTest.PersonBuilder.MARTI
 import static java.util.Collections.emptyList;
 import static org.junit.Assert.assertEquals;
 
+import de.jdufner.tutorials.functional.StabilityTest;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
+@Category(StabilityTest.class)
 public class GroupTest {
 
   @Test

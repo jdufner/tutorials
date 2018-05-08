@@ -1,14 +1,16 @@
 package de.jdufner.tutorials.functional;
 
-import org.junit.Test;
-
 import static de.jdufner.tutorials.functional.Fibonacci.fibonacci;
 import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 /**
  * @author Jürgen Dufner
  * @since 1.0
  */
+@Category(StabilityTest.class)
 public class FibonacciTest {
 
   @Test
