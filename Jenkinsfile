@@ -12,17 +12,23 @@ node {
 
   stage('Build') {
     def mvnHome = tool 'Maven-3.5.0'
-    //sh "${mvnHome}/bin/mvn clean install sonar:sonar -U -Pqa"
-    sh "${mvnHome}/bin/mvn clean verify -U -Pqa"
+    //sh "${mvnHome}/bin/mvn clean install sonar:sonar -B -V -U -Pqa"
+    sh "${mvnHome}/bin/mvn clean verify -B -V -U -Pqa"
   }
 
   stage('Result') {
-      junit '**/target/surefire-reports/TEST*.xml, **/target/failsafe-reports/TEST*.xml'
-      jacoco classPattern: '**/target/classes', execPattern: '**/target/coverage-reports/jacoco**.exec', sourcePattern: '**/src/main/java'
-      checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
-      pmd canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/target/pmd.xml', unHealthy: ''
-      findbugs canComputeNew: false, defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', pattern: '**/target/findbugs/findbugsXml.xml', unHealthy: ''
-      openTasks canComputeNew: false, defaultEncoding: '', excludePattern: '', healthy: '', high: 'FIXME', ignoreCase: true, low: '', normal: 'TODO', pattern: '**/src/main/java/**/*.java, **/src/test/java/**/*.java', unHealthy: ''
+    junit '**/target/surefire-reports/TEST*.xml, **/target/failsafe-reports/TEST*.xml'
+    jacoco classPattern: '**/target/classes', execPattern: '**/target/coverage-reports/jacoco**.exec', sourcePattern: '**/src/main/java'
+
+    recordIssues tools: [checkStyle(pattern: '**/target/checkstyle-result.xml'),
+                         spotBugs(pattern: '**/target/spotbugsXml.xml'),
+                         pmdParser(pattern: '**/target/pmd.xml'),
+                         cpd(pattern: '**/target/cpd.xml'),
+                         taskScanner(highTags:'FIXME', normalTags:'TODO', includePattern: '**/*.java', excludePattern: 'target/**/*')]
+
+    dependencyCheckPublisher canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/dependency-check-report.xml', unHealthy: ''
+
+    //publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/generated-docs/', reportFiles: 'arc42-template.html', reportName: 'arc42-Template', reportTitles: ''])
   }
 
   stage('Archive') {
