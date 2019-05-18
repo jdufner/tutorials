@@ -1,6 +1,6 @@
 node {
 
-  properties([disableConcurrentBuilds(), pipelineTriggers([cron('H H/12 * * *')])])
+  properties([disableConcurrentBuilds(), pipelineTriggers([cron('H H/2 * * *')])])
 
   stage('Configure') {
     env.JAVA_HOME="${tool 'jdk8'}"
