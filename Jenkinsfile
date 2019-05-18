@@ -1,5 +1,7 @@
 node {
 
+  properties([pipelineTriggers([cron('H 4/* * * *')])])
+
   stage('Configure') {
     env.JAVA_HOME="${tool 'jdk8'}"
     env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
