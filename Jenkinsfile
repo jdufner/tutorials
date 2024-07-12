@@ -4,6 +4,7 @@ node {
     env.JAVA_HOME="${tool 'OpenJDK8'}"
     env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
     sh 'echo $JAVA_HOME'
+    sh '$JAVA_HOME/bin/java -version'
     sh 'java -version'
   }
 
