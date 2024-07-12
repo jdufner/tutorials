@@ -3,6 +3,7 @@ node {
   stage('Configure') {
     env.JAVA_HOME="${tool 'OpenJDK8'}"
     env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
+    sh 'echo $JAVA_HOME'
     sh 'java -version'
   }
 
