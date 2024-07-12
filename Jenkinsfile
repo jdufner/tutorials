@@ -11,7 +11,7 @@ node {
   }
 
   stage('Build') {
-    def mvnHome = tool 'Maven-3.5.0'
+    def mvnHome = tool 'Maven-3.5.4'
     //sh "${mvnHome}/bin/mvn clean install sonar:sonar -B -V -U -Pqa"
     sh "${mvnHome}/bin/mvn clean verify -B -V -U -Pqa"
   }
