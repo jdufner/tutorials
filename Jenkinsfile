@@ -1,5 +1,7 @@
 node {
 
+  // properties([disableConcurrentBuilds(), pipelineTriggers([cron('H H/2 * * *')])])
+
   stage('Configure') {
     env.JAVA_HOME="${tool 'OpenJDK21'}"
     env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
